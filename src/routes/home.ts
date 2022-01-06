@@ -1,9 +1,14 @@
-import express from 'express'
+// import libs
+import express from "express";
 
-const router = express.Router()
+// import files
+import posts from "../data/posts";
+
+// main program
+const router = express.Router();
 
 router.get(/^\/(home)?$/, (req, res) => {
-  res.render('home')
-})
+  res.render("home", { posts });
+});
 
-export default router
+export default router;
