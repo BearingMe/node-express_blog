@@ -4,9 +4,9 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "node ./dist/app.js",
     "build": "tsc",
-    "serve": "nodemon src/app.ts"
+    "serve": "npx nodemon ./src/app.ts"
   },
   "author": "smith",
   "license": "MIT",
