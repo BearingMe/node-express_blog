@@ -1,15 +1,12 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    if (title)
-      title Express Blog - #{title}
-    else
-      title Express Blog
-  body 
-    each post in posts
-      h1 #{post.title}
-      p By #{post.author} on #{post.date_posted}
-      p #{post.content}
+extends layout.pug
+
+block content
+  each post in posts
+    article.media.content-section
+      div.media-body
+        div.article-metadata
+          a.mr-2(href='#') #{post.author}
+          small.text-muted #{post.date_posted}
+        h2
+          a.article-title(href='#') #{post.title}
+        p.article-content #{post.content}
