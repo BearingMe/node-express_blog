@@ -1,14 +1,10 @@
-// import libs
 import express from "express";
+import * as homeController from "../controllers/homeController";
 
-// import files
-import posts from "../data/posts";
-
-// main program
 const router = express.Router();
 
-router.get(/^\/(home)?$/, (req, res) => {
-  res.render("home", { posts });
-});
+router
+  .route("/")
+  .get(homeController.getReq);
 
 export default router;
