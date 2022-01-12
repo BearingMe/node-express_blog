@@ -10,7 +10,7 @@ block content
   div.content-section
     form(action="" method="POST")
       fieldset.form-group 
-        legend.border-bottom Join Today
+        legend.border-bottom Registro
 
         // name field
         div.form-group.mb-3.pt-2
@@ -36,7 +36,7 @@ block content
           input.form-control(
             type="email", 
             name="email", 
-            placeholder="Um email válido"
+            placeholder="Insira um email válido"
             value=data? data.email : ''
             required
           )
@@ -52,7 +52,7 @@ block content
           input.form-control(
             type="password", 
             name="password1", 
-            placeholder="Uma senha com no mínimo 8 caracteres"
+            placeholder="Insira uma senha com no mínimo 8 caracteres"
             min="8"
             value=data? data.password1 : ''
             required

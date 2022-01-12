@@ -2,10 +2,10 @@ extends layout.pug
 
 block content
   each post in posts
-    article.media.content-section
+    article.media.content-section.pt-0
       div.media-body
-        div.article-metadata
-          a.mr-2(href='#') #{post.author}
+        div.article-metadata.py-1
+          a.mr-2.text-decoration-none(href='#') #{post.author}
           small.text-muted #{post.date_posted}
         h2
           a.article-title(href='#') #{post.title}

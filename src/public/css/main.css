@@ -13,6 +13,10 @@ h6 {
   color: #444444;
 }
 
+.navbar-brand {
+  margin-top: -3px;
+}
+
 .bg-steel {
   background-color: #5f788a;
 }
@@ -39,6 +43,8 @@ h6 {
 
 .article-title {
   color: #444444;
+  font-size: 20px;
+  text-decoration: none;
 }
 
 a.article-title:hover {
@@ -60,6 +66,10 @@ a.article-title:hover {
   padding-bottom: 1px;
   margin-bottom: 4px;
   border-bottom: 1px solid #e3e3e3;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .article-metadata a:hover {
