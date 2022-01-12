@@ -1,5 +1,6 @@
 // import libs
-import express, { application } from 'express';
+import express from 'express';
+import session from 'express-session';
 import path from 'path';
 
 // import files
@@ -11,6 +12,13 @@ import loginRouter from './routes/login';
 // constants 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// set up session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 // load view engine
 app.set('view engine', 'pug');
