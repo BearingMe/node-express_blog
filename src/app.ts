@@ -1,13 +1,14 @@
 // import libs
+import "dotenv/config";
 import express from "express";
 import session from "express-session";
 import flash from "express-flash";
 import path from "path";
 
 // import files
-import authRoute from "./routes/auth.route";
-import pageRoute from "./routes/page.route";
+import routes from "./routes";
 import * as config from "./config";
+import * as db from "./db";
 
 // constants
 const app = express();
@@ -24,8 +25,11 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // load routes
-app.use("/", pageRoute);
-app.use("/auth/", authRoute);
+app.use("/", routes.page);
+app.use("/auth/", routes.auth);
 
 // start server
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+// start database
+db.connect(process.env.DB_URI as string);
