@@ -1,15 +1,15 @@
 import express from "express";
 
-import * as controller from "../controllers/page.controller";
+import controllers from "../controllers";
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(controller.getHome);
+  .get(controllers.pages.getHome);
 
 router
   .route("/about")
-  .get(controller.getAbout);
+  .get(controllers.pages.getAbout);
 
 export default router;
