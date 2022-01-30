@@ -1,18 +1,18 @@
 import express from "express";
 
-import * as controller from "../controllers/auth.controller";
+import controllers from "../controllers";
 import * as validator from "../validators/auth.validator";
 
 const router = express.Router();
 
 router
   .route("/login")
-  .get(controller.getLogin)
-  .post(validator.loginSchema, controller.postLogin);
+  .get(controllers.auth.getLogin)
+  .post(validator.loginSchema, controllers.auth.postLogin);
 
 router
   .route("/register")
-  .get(controller.getRegister)
-  .post(validator.registerSchema, controller.postRegister);
+  .get(controllers.auth.getRegister)
+  .post(validator.registerSchema, controllers.auth.postRegister);
 
 export default router;
