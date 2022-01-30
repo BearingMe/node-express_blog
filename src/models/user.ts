@@ -43,6 +43,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.post("save", function (error: any, _: any, next: any) {
+  if (error.name === "MongoServerError" && error.code === 11000) {
+    next(new Error("Email already exists!"));
+  } else {
+    next();
+  }
+});
+
 userSchema.methods.tokenize = function () {
   const payload = { id: this._id };
   const secret = process.env.JWT_SECRET as string;
