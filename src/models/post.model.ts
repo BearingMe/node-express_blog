@@ -1,31 +1,26 @@
 import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    maxlength: 100,
-    required: true,
-  },
+const options = {timestamps: true};
 
-  content: {
-    type: String,
-    required: true,
-  },
+const postSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      maxlength: 100,
+      required: true,
+    },
 
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+    content: {
+      type: String,
+      required: true,
+    },
 
-  createdAt: {
-    type: Date,
-    default: Date.now,
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  options
+);
 
 export default mongoose.model("Post", postSchema);
