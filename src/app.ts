@@ -1,6 +1,7 @@
 // import libs
 import express from "express";
 import session from "express-session";
+import flash from "express-flash";
 import path from "path";
 
 // import files
@@ -12,18 +13,15 @@ import * as config from "./config";
 const app = express();
 const port = process.env.PORT ?? 3000;
 
-// set up session
+// middlewares
 app.use(session(config.session));
+app.use(flash());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // load view engine
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-
-// load body parser
-app.use(express.urlencoded({ extended: false }));
-
-// load static files
-app.use(express.static(path.join(__dirname, "public")));
 
 // load routes
 app.use("/", pageRoute);

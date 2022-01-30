@@ -19,7 +19,16 @@ export function postRegister(req: Request, res: Response) {
     errors: errors.array(),
   };
 
-  errors.isEmpty() ? res.redirect("/") : res.render("register", options);
+  if (errors.isEmpty()) {
+    res.render("register", options);
+    return;
+  } 
+  
+  else {
+    req.flash("success", "You are registered!");
+    res.redirect("/");
+    return;
+  }
 }
 
 export function postLogin(req: Request, res: Response) {
@@ -32,5 +41,14 @@ export function postLogin(req: Request, res: Response) {
     errors: errors.array(),
   };
 
-  errors.isEmpty() ? res.redirect("/") : res.render("login", options);
+  if (!errors.isEmpty()) {
+    res.render("login", options);
+    return;
+  } 
+
+  else {
+    req.flash("success", "You are logged in");
+    res.redirect("/");
+    return;
+  }
 }
