@@ -19,11 +19,11 @@ export function postRegister(req: Request, res: Response) {
     errors: errors.array(),
   };
 
-  if (errors.isEmpty()) {
+  if (!errors.isEmpty()) {
     res.render("register", options);
     return;
   } 
-  
+
   else {
     req.flash("success", "You are registered!");
     res.redirect("/");
