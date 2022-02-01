@@ -59,4 +59,8 @@ userSchema.methods.tokenize = function () {
   return jwt.sign(payload, secret, options);
 };
 
+userSchema.methods.validatePassword = async function (password: string): Promise<boolean> {
+  return await bcrypt.compare(password, this.password);
+};
+
 export default mongoose.model("User", userSchema);
