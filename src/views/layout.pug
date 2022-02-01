@@ -28,8 +28,11 @@ html(lang="en")
               a.nav-item.nav-link(href='/') Home
               a.nav-item.nav-link(href='/about') Sobre
             div.navbar-nav
-              a.nav-item.nav-link(href='/auth/login') Login
-              a.nav-item.nav-link(href='/auth/register') Registrar
+              if (!locals.isLoggedIn)
+                a.nav-item.nav-link(href='/auth/login') Login
+                a.nav-item.nav-link(href='/auth/register') Registrar
+              else
+                a.nav-item.nav-link(href='/auth/logout') Logout
 
     main.container(role='main').pt-4
       div.row

@@ -11,6 +11,9 @@ import * as middlewares from "./middlewares";
 import * as config from "./config";
 import * as db from "./db";
 
+// import types
+import type { Request, Response, NextFunction } from "express";
+
 // constants
 const app = express();
 const port = process.env.PORT ?? 3000;
@@ -20,13 +23,8 @@ app.use(session(config.session));
 app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(function (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-): void {
-  console.log(req.user);
-  res.locals.msg = "hello";
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.locals.session = req.session;
   next();
 });
 

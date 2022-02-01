@@ -11,6 +11,10 @@ router
   .post(validators.auth.loginSchema, controllers.auth.postLogin);
 
 router
+  .route("/logout")
+  .get(controllers.auth.getLogout)
+
+router
   .route("/register")
   .get(controllers.auth.getRegister)
   .post(validators.auth.registerSchema, controllers.auth.postRegister);

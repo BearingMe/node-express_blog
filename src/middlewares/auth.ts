@@ -36,7 +36,9 @@ export function ensureAuthenticated(
         req.flash("error", "Something went wrong");
         res.redirect(loginPath);
       });
-  } catch (err) {
+  } 
+  
+  catch (err) {
     req.flash("error", "Please log in");
     res.redirect(loginPath);
   }
