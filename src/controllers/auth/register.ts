@@ -41,7 +41,6 @@ export function postRegister(req: Request, res: Response): void {
       res.redirect("/");
     })
     .catch((err) => {
-      console.log(err.message);
       res.render("register", { ...options, error: err.message });
     });
 }
