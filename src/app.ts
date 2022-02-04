@@ -24,7 +24,7 @@ app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.locals.session = req.session;
+  res.locals.isLoggedIn = Boolean(req.session.token);
   next();
 });
 
@@ -34,7 +34,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // load routes
 app.use("/", routes.page);
-app.use("/user/", middlewares.ensureAuthenticated);
+app.use("/user/", middlewares.ensureAuthenticated, routes.user);
 app.use("/auth/", routes.auth);
 
 // start server

@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
       default:
-        "https://res.cloudinary.com/dzqbzqgqy/image/upload/v1589788981/default_avatar_jxqzqz.png",
+        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
     },
   },
   options
@@ -59,7 +59,9 @@ userSchema.methods.tokenize = function () {
   return jwt.sign(payload, secret, options);
 };
 
-userSchema.methods.validatePassword = async function (password: string): Promise<boolean> {
+userSchema.methods.validatePassword = async function (
+  password: string
+): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
 

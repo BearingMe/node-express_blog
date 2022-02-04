@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-// get request
+
 export function getLogout(req: Request, res: Response): void {
   req.session.token = "";
 

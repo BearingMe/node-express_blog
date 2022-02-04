@@ -1,0 +1,12 @@
+extends layout 
+block content 
+  div.content-section
+    div.media
+      img.rounded-circle.account-img(src=user.image)
+      div.media-body
+        h2.account-heading 
+          | Bem vindo, #{user.username}
+        p.text-secondary 
+          | #{user.email}
+
+        
