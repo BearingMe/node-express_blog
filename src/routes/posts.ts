@@ -6,8 +6,8 @@ import validators from "../validators";
 const router = express.Router();
 
 router
-  .route("/")
-  .get(controllers.user.getAccount)
-  .post(validators.auth.updateSchema, controllers.user.postAccount);
+  .route("/new")
+  .get(controllers.posts.getCreate)
+  .post(validators.posts.editSchema, controllers.posts.postCreate);
 
 export default router;

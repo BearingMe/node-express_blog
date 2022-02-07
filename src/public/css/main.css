@@ -35,7 +35,7 @@ h6 {
 
 .content-section {
   background: #ffffff;
-  padding: 10px 20px;
+  padding: 20px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
@@ -92,4 +92,19 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 1.25rem;
+}
+
+.media {
+  display: flex;
+}
+
+.media-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+form legend {
+  font-size: 18px;
+  font-weight: bold;
 }

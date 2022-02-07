@@ -32,12 +32,19 @@ html(lang="en")
                 a.nav-item.nav-link(href='/auth/login') Login
                 a.nav-item.nav-link(href='/auth/register') Registrar
               else
+                a.nav-item.nav-link(href='/posts/new') New Post 
+                a.nav-item.nav-link(href='/user') Account 
                 a.nav-item.nav-link(href='/auth/logout') Logout
 
     main.container(role='main').pt-4
       div.row
         div.col-md-8.col-lg-9
+          if (errors)
+            for error of errors
+              div.alert.alert-danger.mt-3
+                | #{error.msg}
           if (error)
+            | singular
             div.alert.alert-danger
               | #{error}
           if (success) 
