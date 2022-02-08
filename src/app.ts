@@ -8,8 +8,8 @@ import path from "path";
 // import files
 import routes from "./routes";
 import * as middlewares from "./middlewares";
-import * as config from "./config";
-import * as db from "./db";
+import * as config from "./config/options";
+import * as db from "./config/db";
 
 // import types
 import type { Request, Response, NextFunction } from "express";
