@@ -8,7 +8,7 @@ import path from "path";
 // import files
 import routes from "./routes";
 import * as middlewares from "./middlewares";
-import * as config from "./config/options";
+import * as options from "./config/options";
 import * as db from "./config/db";
 
 // import types
@@ -19,8 +19,9 @@ const app = express();
 const port = process.env.PORT ?? 3000;
 
 // middlewares
-app.use(session(config.session));
+app.use(session(options.session));
 app.use(flash());
+app.use(middlewares.loadFlashMessages);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use((req: Request, res: Response, next: NextFunction) => {

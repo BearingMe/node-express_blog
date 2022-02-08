@@ -3,56 +3,45 @@ import { matchedData, validationResult } from "express-validator";
 import models from "../../models";
 
 // get request
-export function getLogin(_: any, res: Response): void {
-  const options = {
-    title: "Login",
-  };
-
-  res.render("login", options);
+export function getLogin(req: any, res: Response): void {
+  res.render("login", { title: "Login" });
   return;
 }
 
 // post request
 export function postLogin(req: Request, res: Response): void {
   const errors = validationResult(req);
-  const body = matchedData(req);
-
-  const options = {
-    title: "Login",
-    errors: errors.array(),
-    data: body,
-  };
+  const { email, password1 } = matchedData(req);
 
   if (!errors.isEmpty()) {
-    res.render("login", options);
+    const errorsArray = errors.array();
+    const errorsMsg = errorsArray.map((error) => error.msg);
 
-    return;
-  } 
-  
-  else {
-    models.user
-      .findOne({ email: body.email })
-      .then(async (user) => {
-        // check if user exists
-        if (!user) {
-          throw new Error("User does not exist!");
-        }
-
-        // check if password is correct
-        const isPasswordCorrect = await user.validatePassword(body.password1);
-        if (!isPasswordCorrect) {
-          throw new Error("Password is incorrect!");
-        }
-
-        // create token and redirect to home
-        req.session.token = user.tokenize();
-        req.flash("success", "You are logged in");
-        res.redirect("/");
-      })
-      .catch((err) => {
-        res.render("login", { ...options, error: err.message });
-      });
-
-    return;
+    req.flash("error_message", errorsMsg);
+    res.redirect("/auth/login");
   }
+
+  models.user
+    .findOne({ email: email })
+    .then(async (user) => {
+      if (!user) {
+        throw new Error("User does not exist!");
+      }
+
+      // check if password is correct
+      const isPasswordCorrect = await user.validatePassword(password1);
+      if (!isPasswordCorrect) {
+        throw new Error("Password is incorrect!");
+      }
+
+      // create token and redirect to home
+      req.session.token = user.tokenize();
+      req.flash("success_message", "You are logged in");
+      res.redirect("/");
+    })
+    .catch((err) => {
+      req.session.token = "";
+      req.flash("error_message", err.message);
+      res.redirect("/auth/login");
+    });
 }

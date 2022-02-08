@@ -39,17 +39,12 @@ html(lang="en")
     main.container(role='main').pt-4
       div.row
         div.col-md-8.col-lg-9
-          if (errors)
-            for error of errors
-              div.alert.alert-danger.mt-3
-                | #{error.msg}
-          if (error)
-            | singular
-            div.alert.alert-danger
-              | #{error}
-          if (success) 
+          for message of locals.success_messages
             div.alert.alert-success
-              | #{success}
+              | #{message}
+          for message of locals.error_messages
+            div.alert.alert-danger
+              | #{message}
           block content
         div.col-md-4.col-lg-3
           div.content-section.p-0

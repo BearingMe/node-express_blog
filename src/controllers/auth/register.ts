@@ -4,43 +4,37 @@ import models from "../../models";
 
 // get request
 export function getRegister(_: any, res: Response): void {
-  const options = {
-    title: "Register",
-  };
-
-  res.render("register", options);
+  res.render("register", { title: "Register" });
   return;
 }
 
 // post request
 export function postRegister(req: Request, res: Response): void {
   const errors = validationResult(req);
-  const body = matchedData(req);
-
-  const options = {
-    title: "Register",
-    errors: errors.array(),
-    data: body,
-  };
+  const { user, email, password1 } = matchedData(req);
 
   if (!errors.isEmpty()) {
-    res.render("register", options);
+    const errorsArray = errors.array();
+    const errorsMsg = errorsArray.map((error) => error.msg);
+
+    req.flash("error_message", errorsMsg);
+    res.redirect("/auth/register");
 
     return;
   }
 
   models.user
     .create({
-      username: body.user,
-      email: body.email,
-      password: body.password1,
+      username: user,
+      email: email,
+      password: password1,
     })
-    .then((user) => {
-      req.session.token = user.tokenize();
-      req.flash("success", "You have been registered successfully!");
-      res.redirect("/");
+    .then(() => {
+      req.flash("success_message", "You have been registered successfully!");
+      res.redirect("/auth/login");
     })
     .catch((err) => {
-      res.render("register", { ...options, error: err.message });
+      req.flash("error_message", err.message);
+      res.redirect("/auth/register");
     });
 }
