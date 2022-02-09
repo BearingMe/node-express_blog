@@ -1,11 +1,15 @@
 extends layout.pug
 
 block content
+  if (posts.length === 0)
+    div.alert.alert-warning.text-center
+      | Nenhum post encontrado :(
+
   each post in posts
     article.media.content-section.pt-0
-      div.media-body
+      div.media-body.w-100
         div.article-metadata.py-1
-          a.mr-2.text-decoration-none(href='#') #{post.author}
+          a.mr-2.text-decoration-none(href='#') #{post.author.username}
           small.text-muted #{post.date_posted}
         h2
           a.article-title(href='#') #{post.title}

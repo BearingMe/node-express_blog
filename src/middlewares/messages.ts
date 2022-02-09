@@ -8,6 +8,5 @@ export function loadFlashMessages(
   res.locals.success_messages = req.flash("success_message");
   res.locals.error_messages = req.flash("error_message");
 
-  console.log(res.locals.success_message);
   next();
 }
