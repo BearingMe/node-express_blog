@@ -9,7 +9,7 @@ export function getHome(req: Request, res: Response) {
 
   models.post
     .find()
-    .populate("author", "username")
+    .populate("author", "username image")
     .then((posts: any) => {
       options.posts = posts;
       res.render("home", options);

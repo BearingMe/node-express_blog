@@ -1,7 +1,4 @@
-import { ensureAuthenticated } from "./auth";
+import { ensureAuthenticated, decodeToken } from "./auth";
 import { loadFlashMessages } from "./messages";
 
-export {
-  ensureAuthenticated,
-  loadFlashMessages,
-}
+export { ensureAuthenticated, loadFlashMessages, decodeToken };

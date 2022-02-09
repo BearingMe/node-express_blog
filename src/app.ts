@@ -22,6 +22,7 @@ const port = process.env.PORT ?? 3000;
 app.use(session(options.session));
 app.use(flash());
 app.use(middlewares.loadFlashMessages);
+app.use(middlewares.decodeToken);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use((req: Request, res: Response, next: NextFunction) => {

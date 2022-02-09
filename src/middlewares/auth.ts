@@ -2,44 +2,47 @@ import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import models from "../models";
 
+export function decodeToken(req: Request, res: Response, next: NextFunction) {
+  const token = req.session.token;
+
+  if (!token) {
+    return next();
+  }
+
+  try {
+    const { id } = jwt.verify(token, process.env.JWT_SECRET as string) as any;
+    (req as any).userId = id;
+  } 
+  
+  catch (err) {
+    return next();
+  }
+
+  next();
+}
+
+// middleware to check if the user is authenticated
 export function ensureAuthenticated(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const token = req.session.token;
+  const { userId } = req as any;
   const loginPath = "/auth/login";
 
-  if (!token) {
-    req.flash("error", "Please log in");
-    res.redirect(loginPath);
-    return;
-  }
+  models.user
+    .findById(userId)
+    .then((user) => {
+      if (!user) {
+        throw new Error("User not found");
+      }
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as any;
-
-    models.user
-      .findById(decoded.id)
-      .then((user) => {
-        if (!user) {
-          req.flash("error", "User not found");
-          res.redirect(loginPath);
-          return;
-        }
-
-        req.user = user;
-        next();
-      })
-      .catch((err) => {
-        console.log(err);
-        req.flash("error", "Something went wrong");
-        res.redirect(loginPath);
-      });
-  } 
-  
-  catch (err) {
-    req.flash("error", "Please log in");
-    res.redirect(loginPath);
-  }
+      req.user = user;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      req.flash("error_message", err.message);
+      res.redirect(loginPath);
+    });
 }

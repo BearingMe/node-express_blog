@@ -12,4 +12,8 @@ router
   .route("/about")
   .get(controllers.pages.getAbout);
 
+router
+  .route("/post/:id")
+  .get(controllers.pages.getPost);
+
 export default router;
