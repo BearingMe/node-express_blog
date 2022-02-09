@@ -10,7 +10,7 @@ export const editSchema = expressValidator.checkSchema({
     },
   },
 
-  body: {
+  content: {
     in: "body",
     isString: true,
     isLength: {

@@ -37,7 +37,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", routes.page);
 app.use("/user/", middlewares.ensureAuthenticated, routes.user);
 app.use("/auth/", routes.auth);
-app.use("/posts/", routes.posts);
+app.use("/posts/", middlewares.ensureAuthenticated, routes.posts);
 
 // start server
 app.listen(port, () => console.log(`Listening on port ${port}`));

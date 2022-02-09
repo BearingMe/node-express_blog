@@ -32,10 +32,10 @@ block content
           label.form-control-label.mb-2(for="exampleFormControlTextarea1") Texto
 
           textarea.form-control(
-            name="body", 
+            name="content", 
             rows="4", 
             placeholder="Insira um texto"
-            value=data? data.text : ''
+            value=data? data.content : ''
             required
           )
 
@@ -45,4 +45,4 @@ block content
           if (errors) 
             +show-error('password1')
       div.text-end
-        button.btn.btn-outline-primary.my-1(type="submit") Registrar 
+        button.btn.btn-outline-primary.my-1(type="submit") Salvar
