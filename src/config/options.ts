@@ -2,7 +2,7 @@ import type { CookieOptions } from "express-session";
 
 const cookieOptions: CookieOptions = {
   httpOnly: true,
-  sameSite: "none",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   secure: process.env.NODE_ENV === "production",
   maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
 };

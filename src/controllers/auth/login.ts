@@ -19,6 +19,8 @@ export function postLogin(req: Request, res: Response): void {
 
     req.flash("error_message", errorsMsg);
     res.redirect("/auth/login");
+
+    return;
   }
 
   models.user
@@ -30,10 +32,12 @@ export function postLogin(req: Request, res: Response): void {
 
       // check if password is correct
       const isPasswordCorrect = await user.validatePassword(password1);
+
+      
       if (!isPasswordCorrect) {
         throw new Error("Password is incorrect!");
       }
-
+      
       // create token and redirect to home
       req.session.token = user.tokenize();
       req.flash("success_message", "You are logged in");
@@ -42,6 +46,7 @@ export function postLogin(req: Request, res: Response): void {
     .catch((err) => {
       req.session.token = "";
       req.flash("error_message", err.message);
-      res.redirect("/auth/login");
+      console.log(err.message);
+      // res.redirect("/auth/login");
     });
 }
