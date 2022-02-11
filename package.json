@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "tsc",
+    "postinstall": "npm run build && npm run start",
     "serve": "npx nodemon --exec ts-node -T ./src/app.ts"
   },
   "author": "smith",
