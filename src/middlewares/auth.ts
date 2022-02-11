@@ -5,9 +5,7 @@ import models from "../models";
 export function decodeToken(req: Request, res: Response, next: NextFunction) {
   const token = req.session.token;
 
-  if (!token) {
-    return next();
-  }
+  if (!token) return next();
 
   try {
     const { id } = jwt.verify(token, process.env.JWT_SECRET as string) as any;

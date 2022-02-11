@@ -10,4 +10,9 @@ router
   .get(controllers.posts.getCreate)
   .post(validators.posts.editSchema, controllers.posts.postCreate);
 
+router
+  .route("/update/:id")
+  .get(controllers.posts.getUpdate)
+  .post(validators.posts.editSchema, controllers.posts.postUpdate);
+
 export default router;

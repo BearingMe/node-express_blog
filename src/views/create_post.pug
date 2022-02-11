@@ -20,7 +20,7 @@ block content
             type="text", 
             name="title", 
             placeholder="Insira um título"
-            value=data? data.title : ''
+            value=post? post.title : ''
             required
           )
 
@@ -35,9 +35,8 @@ block content
             name="content", 
             rows="4", 
             placeholder="Insira um texto"
-            value=data? data.content : ''
             required
-          )
+          ) #{post? post.content : ''}
 
           if (errors) 
             +show-error('text')

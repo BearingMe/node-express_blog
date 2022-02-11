@@ -14,4 +14,4 @@ block content
           small.text-muted #{post.updatedAt.toLocaleDateString()}
         h2
           a.article-title(href=`post/${post._id}`) #{post.title}
-        p.article-content #{post.content}
+        p.article-content #{post.content.slice(0, 100).trim()}...
