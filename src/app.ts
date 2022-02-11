@@ -18,6 +18,8 @@ import type { Request, Response, NextFunction } from "express";
 const app = express();
 const port = process.env.PORT ?? 3000;
 
+app.set("trust proxy", 1);
+
 // middlewares
 app.use(session(options.session));
 app.use(flash());
