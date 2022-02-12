@@ -25,5 +25,5 @@ block content
             span(aria-hidden='true') &times;
         div.modal-footer
           button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-          form(action="{{ url_for('delete_post', post_id=post.id) }}" method='POST')
+          form(action=`/posts/delete/${post._id}` method='POST')
             input.btn.btn-danger(type='submit' value='Delete')

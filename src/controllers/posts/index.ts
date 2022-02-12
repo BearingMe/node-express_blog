@@ -1,8 +1,11 @@
 import { getCreate, postCreate } from "./create";
 import { getUpdate, postUpdate } from "./update";
+import { postDelete } from "./delete";
+
 export default {
-  getCreate, 
+  getCreate,
   postCreate,
   getUpdate,
-  postUpdate
-}
+  postUpdate,
+  postDelete,
+};

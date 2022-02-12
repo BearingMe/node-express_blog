@@ -15,4 +15,8 @@ router
   .get(controllers.posts.getUpdate)
   .post(validators.posts.editSchema, controllers.posts.postUpdate);
 
+router
+  .route("/delete/:id")
+  .post(controllers.posts.postDelete);
+
 export default router;
