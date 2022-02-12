@@ -10,9 +10,6 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "build": "tsc",
-    "copyPublic": "mkdir dist/public && cp -r src/public/* dist/public/",
-    "copyViews": "mkdir dist/views && cp -r src/views/* dist/views/",
-    "postinstall": "npm run build && npm run copyPublic && npm run copyViews",
     "serve": "npx nodemon --exec ts-node -T ./src/app.ts"
   },
   "author": "smith",

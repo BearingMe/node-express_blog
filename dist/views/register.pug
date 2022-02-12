@@ -1,0 +1,80 @@
+extends layout 
+
+mixin show-error(param)
+  for error in errors
+    if error.param === param
+      div(role='alert')
+        span.small.text-danger #{error.msg}
+
+block content 
+  div.content-section
+    form(action="" method="POST")
+      fieldset.form-group 
+        legend.border-bottom Registro
+
+        // name field
+        div.form-group.mb-3.pt-2
+          label.form-control-label.mb-2(for="exampleInputEmail1") Nome:
+
+          input.form-control(
+            type="text", 
+            name="user", 
+            placeholder="Seu nome de usuário ou apelido"
+            min="3"
+            max="20"
+            value=data? data.user : ''
+            required
+          )
+
+          if (errors) 
+            +show-error('user')
+
+        // email field
+        div.form-group.mb-3
+          label.form-control-label.mb-2(for="exampleInputEmail1") Email
+
+          input.form-control(
+            type="email", 
+            name="email", 
+            placeholder="Insira um email válido"
+            value=data? data.email : ''
+            required
+          )
+
+          if (errors) 
+            +show-error('email')
+
+
+        // password field
+        div.form-group.mb-3
+          label.form-control-label.mb-2(for="exampleInputPassword1") Senha
+
+          input.form-control(
+            type="password", 
+            name="password1", 
+            placeholder="Insira uma senha com no mínimo 8 caracteres"
+            min="8"
+            value=data? data.password1 : ''
+            required
+          )
+
+          if (errors) 
+            +show-error('password1')
+
+        // password confirmation field
+        div.form-group.mb-3
+          label.form-control-label.mb-2(for="exampleInputPassword1") Confirmar Senha
+
+          input.form-control(
+            type="password", 
+            name="password2", 
+            placeholder="Confirmar a senha"
+            min="8"
+            value=data? data.password2 : ''
+            required
+          )
+
+          if (errors) 
+            +show-error('password2')
+
+      button.btn.btn-primary.mt-2.mb-3(type="submit") Registrar 

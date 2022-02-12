@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+  if (posts.length === 0)
+    div.alert.alert-warning.text-center
+      | Nenhum post encontrado :(
+
+  each post in posts
+    article.media.content-section.pt-0
+      img.rounded-circle.author-image(src=post.author.image)
+      div.media-body.w-100
+        div.article-metadata.py-1
+          a.mr-2.text-decoration-none(href="#") #{post.author.username}
+          small.text-muted #{post.updatedAt.toLocaleDateString()}
+        h2
+          a.article-title(href=`post/${post._id}`) #{post.title}
+        p.article-content #{post.content.slice(0, 100).trim()}...

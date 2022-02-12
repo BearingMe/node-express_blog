@@ -1,0 +1,61 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/css/main.css")
+    if (title)
+      title Express Machine - #{title}
+    else
+      title Express Machine
+  body
+    header.site-header
+      nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.py-3
+        div.container
+          a.navbar-brand(href='/') Express Machine 
+          button.navbar-toggler(
+            type='button' 
+            data-toggle='collapse' 
+            data-target='#navbarToggle' 
+            aria-controls='navbarToggle' 
+            aria-expanded='false' 
+            aria-label='Toggle navigation'
+          )
+            span.navbar-toggler-icon
+          div#navbarToggle.collapse.navbar-collapse.d-flex.justify-content-between
+            div.navbar-nav
+              a.nav-item.nav-link(href='/') Home
+              a.nav-item.nav-link(href='/about') Sobre
+            div.navbar-nav
+              if (!locals.isLoggedIn)
+                a.nav-item.nav-link(href='/auth/login') Login
+                a.nav-item.nav-link(href='/auth/register') Registrar
+              else
+                a.nav-item.nav-link(href='/posts/new') New Post 
+                a.nav-item.nav-link(href='/user') Account 
+                a.nav-item.nav-link(href='/auth/logout') Logout
+
+    main.container(role='main').pt-4
+      div.row
+        div.col-md-8.col-lg-9
+          for message of locals.success_messages
+            div.alert.alert-success
+              | #{message}
+          for message of locals.error_messages
+            div.alert.alert-danger
+              | #{message}
+          block content
+        div.col-md-4.col-lg-3
+          div.content-section.p-0
+            ul.list-group.list-group-flush
+              li.list-group-item.list-group-item-light 
+                h4.h6.my-1 Sidebar
+              li.list-group-item.list-group-item-light Postagens Recentes
+              li.list-group-item.list-group-item-light Notícias
+              li.list-group-item.list-group-item-light Eventos
+              li.list-group-item.list-group-item-light Outros
+
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous")
