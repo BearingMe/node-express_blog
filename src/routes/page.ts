@@ -5,7 +5,7 @@ import controllers from "../controllers";
 const router = express.Router();
 
 router
-  .route("/")
+  .route("/:id?")
   .get(controllers.pages.getHome);
 
 router
